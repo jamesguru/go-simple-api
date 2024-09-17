@@ -5,18 +5,14 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/jamesguru/dev-api/models"
 	"github.com/labstack/echo/v4"
 )
 
-type Book struct {
-	Name   string `json:"name" xml:"name" validate:"required"`
-	Author string `json:"author" validate:"required"`
-}
-
-var books []Book
+var books []models.Book
 
 func AddBooks(c echo.Context) error {
-	var book Book
+	var book models.Book
 	err := c.Bind(&book)
 	if err != nil {
 		return c.String(http.StatusBadRequest, "bad request")
